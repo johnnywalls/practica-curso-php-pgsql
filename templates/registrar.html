@@ -1,0 +1,17 @@
+{% extends "index.html" %} 
+
+{% block titulo %}{% endblock %}
+{% block menu_activo %}menu-registrar{% endblock %}
+{% block migajas %}
+<ol class="breadcrumb">
+  <li><a href="index.php">Inicio</a></li>
+  <li class="active">Registrar Película</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<h2>Registrar Película</h2>
+
+{% include 'formulario.html' %}
+
+{% endblock %}

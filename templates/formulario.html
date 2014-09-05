@@ -1,0 +1,61 @@
+<form role="form">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Datos básicos</h3>
+        </div>
+        <div class="panel-body">
+          <label for="title">Título</label>
+          <input type="text" class="form-control" name="title" id="title" placeholder="Título..." value="{{ film.title }}" required>
+          <label for="description">Descripción</label>
+          <textarea class="form-control" name="description" id="description" placeholder="Descripción o sinopsis...">{{ film.description }}</textarea>
+          <label for="release_year">Año de Lanzamiento</label>
+          <input type="number" class="form-control" name="release_year" id="release_year" min="1930" max="2100" step="1" value="{{ film.release_year }}">
+          <label for="length">Duración (minutos)</label>
+          <input type="number" class="form-control" name="length" id="length" min="1" step="1" value="{{ film.length }}">
+          <label for="language_id">Idioma</label>
+          <select class="form-control" name="language_id" id="language_id" value="{{ film.language_id }}">
+            {% for idioma in idiomas %}
+            <option value="{{ idioma.language_id }}">{{ idioma.name }}</option>
+            {% endfor %}
+          </select>
+          <label for="rental_duration">Días de Alquiler</label>
+          <input type="number" class="form-control" name="rental_duration" id="rental_duration" min="1" step="1" value="{{ film.rental_duration }}">
+          <label for="rental_rate">Costo de Alquiler</label>
+          <input type="number" class="form-control" name="rental_rate" id="rental_rate" step="0.50" value="{{ film.rental_duration }}">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Reparto</h3>
+        </div>
+        <div class="panel-body">
+          <select class="form-control" name="actor_id" id="actor_id" value="{{ actores_id }}" size="6" multiple>
+            {% for actor in lista_actores %}
+            <option value="{{ actor.actor_id }}">{{ actor.first_name }} {{ actor.last_name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Categorías</h3>
+        </div>
+        <div class="panel-body">
+          <select class="form-control" name="category_id" id="category_id" value="{{ categorias_id }}" size="4" multiple>
+            {% for cat in lista_categorias %}
+            <option value="{{ cat.category_id }}">{{ cat.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+</form>

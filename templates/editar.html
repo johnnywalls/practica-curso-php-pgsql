@@ -1,0 +1,17 @@
+{% extends "index.html" %} 
+
+{% block titulo %}{% endblock %}
+{% block migajas %}
+<ol class="breadcrumb">
+  <li><a href="index.php">Inicio</a></li>
+  <li><a href="consultar.php">Consultar Películas</a></li>
+  <li class="active">Editar</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<h2>Editar Película</h2>
+
+{% include 'formulario.html' %}
+
+{% endblock %}

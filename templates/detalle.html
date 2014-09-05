@@ -1,0 +1,92 @@
+{% extends "index.html" %} 
+
+{% block titulo %}{% endblock %}
+{% block migajas %}
+<ol class="breadcrumb">
+  <li><a href="index.php">Inicio</a></li>
+  <li><a href="consultar.php">Consultar Películas</a></li>
+  <li class="active">Detalle</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<h2>{{ film['title'] }}</h2>
+
+<div class="well">
+  <p>{{ film['description'] }}</p>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Datos básicos</h3>
+      </div>
+      <div class="panel-body">
+        <dl>
+          <dt>Año de lanzamiento:</dt>
+          <dd>{{ film['release_year'] }}</dd>
+          <dt>Duración:</dd>
+          <dd>{{ film['length'] }} min</dt>
+          <dt>Idioma:</dt>
+          <dd>{{ film['language_name'] }}</dd>
+          <dt>Alquiler:</dt>
+          <dd>{{ film['rental_duration'] }} días - {{ film['rental_rate'] }}$</dd>
+          <dt>Categorías:</dt>
+          <dd>{{ film['categories'] }}</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Reparto</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+            <tr><th>Actores</th></tr>
+          </thead>
+          <tbody>
+            {% for actor in film['actors']|split(', ') %}
+            <tr><td>{{ actor }}</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Existencia</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Tienda</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for fila in film['inventories']|split(', ') %}
+            <tr>
+							{% for columna in fila|split(':') %}
+              <td>{{ columna }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row text-center">
+    <a href="#" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Alquilar</a>
+    <a href="editar.php?film_id={{ film['film_id'] }}" class="btn btn-info" role="button"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+    <a href="eliminar.php?film_id={{ film['film_id'] }}" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>
+</div>
+{% endblock %}
